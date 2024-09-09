@@ -1,5 +1,4 @@
 apiVersion: apps/v1
-imagePullPolicy: Always
 kind: Deployment
 metadata:
   name: web-app-dev
@@ -16,6 +15,7 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: tacksam/flask-app:dev  # Your custom Flask Docker
+        image: tacksam/flask-app:dev
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
