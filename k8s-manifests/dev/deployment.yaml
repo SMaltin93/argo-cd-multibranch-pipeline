@@ -4,7 +4,7 @@ metadata:
   name: web-app-dev
   namespace: python-flask
 spec:
-  replicas: 2  # Number of replicas for dev environment
+  replicas: 2
   selector:
     matchLabels:
       app: web-app
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: nginx:latest  # Using a basic image like nginx for now
+        image: tacksam/flask-app:dev  # Your custom Flask Docker image
         ports:
-        - containerPort: 80
+        - containerPort: 5000
