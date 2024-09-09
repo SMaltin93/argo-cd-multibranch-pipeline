@@ -1,4 +1,5 @@
 apiVersion: apps/v1
+imagePullPolicy: Always
 kind: Deployment
 metadata:
   name: web-app-dev
