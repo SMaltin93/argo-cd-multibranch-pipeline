@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-dev
+spec:
+  replicas: 2  # Number of replicas for dev environment
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: web-app
+        image: nginx:latest  # Using a basic image like nginx for now
+        ports:
+        - containerPort: 80
