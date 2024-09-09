@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app-dev
+  namespace: python-flask
 spec:
   replicas: 2  # Number of replicas for dev environment
   selector:
