@@ -8,5 +8,5 @@ spec:
   ports:
   - protocol: TCP
     port: 5000  # External port
-    targetPort: 5000  # Port inside the container
+    targetPort: 5000  # Port inside the container  bhvh
   type: ClusterIP
