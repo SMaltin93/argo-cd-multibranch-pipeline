@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-app
-  namespace: {{ .Values.namespace }}
+  name: web-app-dev
+  namespace: python-flask
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 2
   selector:
     matchLabels:
-      app: {{ .Values.appName }}
+      app: web-app
   template:
     metadata:
       labels:
-        app: {{ .Values.appName }}
+        app: web-app
     spec:
       containers:
-      - name: {{ .Values.appName }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - name: web-app
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"  # Use the latest tag or SHA for the new image
+        imagePullPolicy: Always           # Ensure Kubernetes pulls the latest image
         ports:
-        - containerPort: {{ .Values.containerPort }}
+        - containerPort: 5000
