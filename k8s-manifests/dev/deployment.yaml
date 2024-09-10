@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: web-app-dev
   namespace: python-flask
-  annotations:
-    lastUpdateTime: "{{ now }}"  # This forces the pod to restart when the deployment is synced
 spec:
   replicas: 2
   selector:
@@ -17,7 +15,10 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: tacksam/flask-app:latest
-        imagePullPolicy: Always
+        image: tacksam/flask-app:latest  # Use the latest tag or SHA for the new image
+        imagePullPolicy: Always           # Ensure Kubernetes pulls the latest image
         ports:
         - containerPort: 5000
+  hooks:
+    - name: test
+      command: ["echo", "Hello, Kubernetes!"]
