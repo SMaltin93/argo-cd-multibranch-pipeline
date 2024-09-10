@@ -12,10 +12,10 @@ spec:
     metadata:
       labels:
         app: web-app
-    spec:
-      containers:
-      - name: web-app
-        image: tacksam/flask-app:latest  # Use the latest tag or SHA for the new image
-        imagePullPolicy: Always           # Ensure Kubernetes pulls the latest image
-        ports:
-        - containerPort: 5000
+    # spec:
+    #   containers:
+    #   - name: web-app
+    #     image: tacksam/flask-app:latest  # Use the latest tag or SHA for the new image
+    #     imagePullPolicy: Always           # Ensure Kubernetes pulls the latest image
+    #     ports:
+    #     - containerPort: 5000
