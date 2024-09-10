@@ -24,3 +24,6 @@ jobs:
 
     - name: Push the Docker image
       run: docker push tacksam/flask-app:${{ github.sha }}
+
+    - name: Debug secrets
+      run: echo "${{ secrets.DOCKERHUB_USERNAME }} | ${{ secrets.DOCKERHUB_TOKEN }}"
