@@ -21,9 +21,7 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build -t tacksam/flask-app:${{ github.sha }} -t tacksam/flask-app:latest .
+        docker build -t tacksam/flask-app:${{ github.sha }} .
 
-    - name: Push the Docker image with both tags
-      run: |
-        docker push tacksam/flask-app:${{ github.sha }}
-        docker push tacksam/flask-app:latest
+    - name: Push the Docker image
+      run: docker push tacksam/flask-app:${{ github.sha }}
