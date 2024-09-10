@@ -1,10 +1,3 @@
-name: Build and Push Docker Image
-
-on:
-  push:
-    branches:
-      - dev
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,11 +12,16 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build the Docker image
+    - name: Build and push the Docker image
       run: |
         docker build -t tacksam/flask-app:${{ github.sha }} -t tacksam/flask-app:latest .
-
-    - name: Push the Docker image with both tags
-      run: |
         docker push tacksam/flask-app:${{ github.sha }}
         docker push tacksam/flask-app:latest
+
+    - name: Update deployment.yaml with new image tag
+      run: |
+        sed -i 's|tacksam/flask-app:latest|tacksam/flask-app:${{ github.sha }}|' k8s-manifests/dev/deployment.yaml
+
+    - name: Apply Kubernetes manifest
+      run: |
+        kubectl apply -f k8s-manifests/dev/deployment.yaml
