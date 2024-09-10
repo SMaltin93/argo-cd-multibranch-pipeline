@@ -19,13 +19,3 @@ spec:
         imagePullPolicy: Always           # Ensure Kubernetes pulls the latest image
         ports:
         - containerPort: 5000
-  hooks:
-    - name: rollout-restart
-      type: PreSync
-      exec:
-        command: ["/bin/sh", "-c"]
-        args: ["kubectl rollout restart deployment web-app-dev -n python-flask"]
-
-
-
-          
