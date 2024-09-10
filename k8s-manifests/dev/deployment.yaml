@@ -20,5 +20,12 @@ spec:
         ports:
         - containerPort: 5000
   hooks:
-    - name: test
-      command: ["echo", "Hello, Kubernetes!"]
+    - name: rollout-restart
+      type: PreSync
+      exec:
+        command: ["/bin/sh", "-c"]
+        args: ["kubectl rollout restart deployment web-app-dev -n python-flask"]
+
+
+
+          
