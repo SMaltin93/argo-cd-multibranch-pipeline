@@ -18,12 +18,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+        ecr: false  # Ensure it's not trying to use AWS ECR
 
     - name: Build the Docker image
       run: docker build -t tacksam/flask-app:${{ github.sha }} .
 
     - name: Push the Docker image
       run: docker push tacksam/flask-app:${{ github.sha }}
-
-    - name: Debug secrets
-      run: echo "${{ secrets.DOCKERHUB_USERNAME }} | ${{ secrets.DOCKERHUB_TOKEN }}"
