@@ -4,8 +4,8 @@ metadata:
   name: web-app-dev
   namespace: python-flask
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
-    lastUpdateTime: "{{ now }}"  # Forces pod restart on sync
+    # force to restart the pods when syncing 
+    "kubectl.kubernetes.io/restartedAt": "{{ .Release.Time }}"
 spec:
   replicas: 2
   selector:
