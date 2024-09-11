@@ -4,14 +4,19 @@ kind: Kustomization
 resources:
   - deployment.yaml
 
-patchesStrategicMerge:
-  - |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
+patches:
+  - target:
+      kind: Deployment
       name: web-app-dev
-    spec:
-      template:
-        metadata:
-          annotations:
-            kubectl.kubernetes.io/restartedAt: "{{now}}"  # This will change and trigger a restart
+      namespace: python-flask  # Ensure the namespace matches your Deployment
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: web-app-dev
+        namespace: python-flask
+      spec:
+        template:
+          metadata:
+            annotations:
+              kubectl.kubernetes.io/restartedAt: "{{now}}"  # Automatically update this to trigger a pod restart
