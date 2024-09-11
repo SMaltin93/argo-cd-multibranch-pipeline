@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web-app:
+    build: .
+    ports:
+      - "8081:5000"  # Expose port 8081 locally and map to port 5000 inside the container
+    volumes:
+      - .:/app  # Mount the current directory to /app inside the container
