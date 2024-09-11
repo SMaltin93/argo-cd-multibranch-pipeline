@@ -2,13 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-app-dev
-  namespace: python-flask  # Ensure the namespace matches your deployment
 spec:
   selector:
-    app: web-app  # Ensure the label selector matches the labels in your deployment
+    app: web-app
   ports:
-    - name: http
-      protocol: TCP
-      port: 8081  # External port (accessible from your local machine)
-      targetPort: 5000  # Internal port inside the pod where Flask is running
-  type: ClusterIP  # For internal access. Use LoadBalancer for external access (e.g., cloud)
+  - protocol: TCP
+    port: 5000  # External port
+    targetPort: 5000  # Port inside the container  bhvh
+  type: ClusterIP
