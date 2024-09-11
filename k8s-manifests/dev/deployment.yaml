@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: web-app-dev
   namespace: python-flask
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"  # Sync wave to control sync order if needed
+    deployment.kubernetes.io/revision: "{{now}}"  # This value will change each sync
 spec:
   replicas: 2
   selector:
@@ -12,10 +15,11 @@ spec:
     metadata:
       labels:
         app: web-app
+        restart-on-sync: "{{now}}"  # This will also trigger a restart when the value changes
     spec:
       containers:
       - name: web-app
-        image: tacksam/flask-app:latest  # Use the latest tag or SHA for the new image
-        imagePullPolicy: Always           # Ensure Kubernetes pulls the latest image
+        image: tacksam/flask-app:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
