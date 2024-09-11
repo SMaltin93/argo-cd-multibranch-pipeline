@@ -1,16 +1,15 @@
+# Use a lightweight Python base image
 FROM python:3.8-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy the entire project (including app.py) into the container
 COPY . /app
 
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose the port Flask/Gunicorn will run on
-EXPOSE 5000
-
-# Run the app with Gunicorn (production-grade WSGI server)
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+# Set the default command to run Flask
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

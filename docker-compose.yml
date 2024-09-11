@@ -3,6 +3,9 @@ services:
   web-app:
     build: .
     ports:
-      - "8081:5000"  # Expose port 8081 locally and map to port 5000 inside the container
+      - "8081:5000"  # Map port 5000 in the container to 8081 on localhost
     volumes:
-      - .:/app  # Mount the current directory to /app inside the container
+      - .:/app       # Mount the current directory (.) to /app inside the container
+    environment:
+      - FLASK_ENV=development  # Enable Flask's development mode
+    working_dir: /app           # Ensure /app is the working directory in the container
