@@ -24,8 +24,5 @@ jobs:
         docker build -t tacksam/flask-app:${{ github.sha }} -t tacksam/flask-app:latest .
         docker push tacksam/flask-app:${{ github.sha }}
         docker push tacksam/flask-app:latest
-       
-        sed -i 's/tacksam\/flask-app:.*/tacksam\/flask-app:${{ github.sha }}/g' k8s-manifests/dev/deployment.yaml
-    
-        sed -i 's/tacksam\/flask-app:.*/tacksam\/flask-app:${{ github.sha }}/g' k8s-manifests/dev/service.yaml
+        
         
